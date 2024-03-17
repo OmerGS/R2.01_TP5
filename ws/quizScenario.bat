@@ -1,5 +1,5 @@
-javac -d ../class ../src/QuizScenario.java
+javac -d ../class ../src/ScenarioQuiz.java
 
-java QuizScenario
+java ScenarioQuiz
 
 pause
