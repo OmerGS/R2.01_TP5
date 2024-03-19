@@ -3,16 +3,35 @@ package question;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+* Allow to create question
+* @author O.Gunes 
+*/
 public class Question {
+    /**
+     * Text of a question
+     */
     private String text;
+
+    /**
+     * Answer of a question
+     */
     private String answer;
 
-
+    /**
+    * Empty Constructor of Java. 
+    */
     public Question(){
         this.text = "";
         this.answer = "";
     }
 
+    /**
+    * Constructor of Java
+    *
+    * @param text The text of question
+    * @param answer The answer of question
+     */
     public Question(String text, String answer){
         if(text != null){
             this.text = text;
@@ -27,10 +46,18 @@ public class Question {
         }
     }
 
+    /**
+     * Allow to get the text of question
+     * @return Text of question
+     */
     public String getText(){
         return(this.text);
     }
 
+    /**
+     * Allow to set a text of a question
+     * @param text The text of question
+     */
     public void setText(String text){
         if(text != null){
             this.text = text;
@@ -39,10 +66,18 @@ public class Question {
         }
     }
 
+    /**
+     * Allow to get an Answer 
+     * @return An answer
+     */
     public String getAnswer(){
         return(this.answer);
     }
     
+    /**
+     * Allow to set an answer in a question
+     * @param answer The answer
+     */
     public void setAnswer(String answer){
         if(answer != null){
             this.answer = answer;
@@ -51,46 +86,40 @@ public class Question {
         }
     }
 
+    /**
+     * Allow to check answer
+     * 
+     * @param response The user response
+     * @return Booleaan true if response is correct, false isn't
+     */
     public boolean checkAnswer(String response) {
         String expectedAnswerLower = this.answer.toLowerCase();
         String userResponseLower = response.toLowerCase();
         ArrayList<String> prepositions = new ArrayList<>(Arrays.asList("le", "la", "un", "une", "l'", "de"));
     
-        // Vérifier si la réponse de l'utilisateur est une préposition seule
         if (prepositions.contains(userResponseLower.trim())) {
-            return false; // Préposition seule n'est pas une réponse correcte
+            return false;
         }
     
         boolean isResponseCorrect = false;
     
-        // Vérifier si la réponse de l'utilisateur est égale à la réponse attendue (en ignorant la casse)
-        isResponseCorrect = userResponseLower.equals(expectedAnswerLower);
+        isResponseCorrect = userResponseLower.equalsIgnoreCase(expectedAnswerLower);
     
-        // Vérifier si la réponse de l'utilisateur est une sous-chaîne de la réponse attendue
-        isResponseCorrect = isResponseCorrect || expectedAnswerLower.contains(userResponseLower);
+        String[] expectedWords = expectedAnswerLower.split("\\s+");
     
-        // Vérifier si chaque mot de la réponse attendue est présent dans la réponse de l'utilisateur
-        String[] expectedWords = expectedAnswerLower.split("\\s+"); // Diviser la réponse attendue en mots
-    
-        // Si la réponse n'est pas déjà correcte
-        if (!isResponseCorrect) {
-            // Vérifier si chaque mot de la réponse attendue est présent dans la réponse de l'utilisateur
-            boolean allWordsFound = true;
-            for (String word : expectedWords) {
-                if (!userResponseLower.contains(word)) {
-                    allWordsFound = false;
-                    break; // Arrêter la recherche dès qu'un mot manque
-                }
+        for (String word : expectedWords) {
+            if (userResponseLower.equalsIgnoreCase(word)) {
+                isResponseCorrect = true;
+                break;
             }
-            // isResponseCorrect sera vrai seulement si la réponse complète de l'utilisateur correspond à la réponse attendue
-            isResponseCorrect = allWordsFound && userResponseLower.equals(expectedAnswerLower);
         }
     
         return isResponseCorrect;
     }
     
-
-
+    /***
+    * Allow to display the question 
+    */
     public void display(){
         System.out.println(this.getText());
     }

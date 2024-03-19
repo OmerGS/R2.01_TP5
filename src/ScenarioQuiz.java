@@ -22,9 +22,9 @@ public class ScenarioQuiz {
         Question question8 = new Question("Quel est le plus grand désert du monde ?", "Antarctique");
         Question question9 = new Question("Quel est le pays le plus peuplé au monde ?", "La Chine");
         Question question10 = new Question("Qui a \u00E9t\u00E9 le premier homme à marcher sur la Lune ?", "Neil Armstrong");
-        Question question11 = new Question("Quel organe est responsable de l'\u00E9quilibre d'un être humain", "L'oreille");
+        Question question11 = new Question("Quel organe est responsable de l'\u00E9quilibre d'un être humain", "Oreille");
         Question question12 = new Question("Quelle ann\u00E9e a \u00E9t\u00E9 conquis constantinople ?", "1453");
-        Question question13 = new Question("Quel est le plus grand fleuve d'Am\u00E9rique du Sud ?", "L'Amazone");
+        Question question13 = new Question("Quel est le plus grand fleuve d'Am\u00E9rique du Sud ?", "Amazone");
         Question question14 = new Question("Quel est le symbole chimique de l'eau ?", "H2O");
         Question question15 = new Question("Quel pays produit les Rafales ?", "La France");
         
@@ -152,6 +152,7 @@ public class ScenarioQuiz {
 
         question = new ArrayList<Question>(Arrays.asList(qcm1, qcm2, qcm3, qcm4, qcm5, qcm6, qcm7, qcm8, qcm9, qcm10, qcm11,qcm12, qcm13, qcm14, qcm15, question1, question2, question3, question4, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14, question15));
 
+        tableauScore = new ArrayList<>();
         lancementRound();
     }
 
@@ -159,13 +160,12 @@ public class ScenarioQuiz {
         ArrayList <Question> listeQuestion = new ArrayList<Question>();
         int i = 0;
         while(i < 15){
-            int random = (int) (Math.random() * 29);
+            int random = (int) (Math.random() * 30);
             Question questionAjoute = question.get(random);
             listeQuestion.add(questionAjoute);
             
             i++;
         }
-        tableauScore = new ArrayList<>();
         quiz = new Quiz(listeQuestion);
         round();
     }
@@ -256,7 +256,7 @@ public class ScenarioQuiz {
             }  
             String response = in.nextLine(); 
             if(response.equalsIgnoreCase("o") || response.equalsIgnoreCase("oui")){
-                round();
+                lancementRound();
                 ok = true;
             } else if(response.equalsIgnoreCase("n") || response.equalsIgnoreCase("non")){
                 System.out.println("Merci, d'avoir joue !");
